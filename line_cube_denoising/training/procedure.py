@@ -234,9 +234,14 @@ def learning_procedure(
         pbar_epoch = tqdm(range(epochs), disable=not verbose)
         pbar_epoch.set_description("Epoch")
 
+        print(f"Number of epochs: {epochs}")
+
         for epoch in pbar_epoch:
 
-            print("x", end=" ")
+            if epoch % 10 == 9:
+                print("|", end="")
+            else:
+                print(".", end="")
 
             # Dataloader            
             n_batchs_train = len(dataloader_train)

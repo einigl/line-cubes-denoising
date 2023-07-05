@@ -1,6 +1,6 @@
 # Temporary files or folder
-**temp*
-notebooks/scripts/*
+cubes/
+!cubes/README.md
 
 # Data cubes
 *.fits

@@ -2,7 +2,10 @@ from torch import zeros, eye, Tensor
 from torch.nn.modules import Module
 from torch.nn.functional import linear
 
-__all__ = ["AugmentationLinear"]
+__all__ = [
+    "AugmentationLinear",
+    "TransposedAugmentationLinear"
+]
 
 class AugmentationLinear(Module) :
     r"""Applies a linear transformation to the incoming data: :math:`y = xA^T + b`"""
@@ -27,3 +30,18 @@ class AugmentationLinear(Module) :
 
     def forward(self, input: Tensor) -> Tensor:
         return linear(input, self.w, None)
+
+class TransposedAugmentationLinear(Module) :
+    r"""Applies a linear transformation to the incoming data: :math:`y = xA^T + b`"""
+
+    in_features: int
+    win_size : int
+
+    padding : bool
+
+    def __init__(self, in_features: int, win_size : int) -> None:
+        super().__init__()
+        self.layer = AugmentationLinear(in_features, win_size)
+
+    def forward(self, input: Tensor) -> Tensor:
+        return linear(input, self.layer.w.T, None)
