@@ -59,8 +59,8 @@ class LocalAutoencoder(Autoencoder) :
                 )
             )
 
-        self.projection_layer = nn.Linear(win_size * self.n_win, input_size)
-        self.transposed_projection_layer = nn.Linear(input_size, win_size * self.n_win)
+        self.projection_layer = nn.Linear(self.encoder_module[-1].out_features, bottleneck_size)
+        self.transposed_projection_layer = nn.Linear(bottleneck_size, self.decoder_module[0].in_features)
 
     def forward(self, x: Tensor) -> Tuple[Tensor, Tensor] :
         """

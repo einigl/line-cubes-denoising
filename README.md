@@ -23,6 +23,11 @@ You will need the following packages to import and use `line_cube_denoising`. We
 
 If you do not have a Python environment compatible with the above dependencies, we advise you to create a specific conda environment to use this code (https://conda.io/projects/conda/en/latest/user-guide/).
 
+```bash
+conda create -n tutorial python=3.9 pytorch=2.0.0 notebook numpy matplotlib astropy tqdm
+conda activate tutorial
+```
+
 ### Download
 
 You can download this code using the following command

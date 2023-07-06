@@ -1,10 +1,11 @@
 """ Dataset """
 
-from typing import Optional, Sequence
+from typing import Optional, Sequence, Tuple
 
 import numpy as np
 
 import torch
+from torch import Tensor
 from torch.utils.data import Dataset
 
 __all__ = [
@@ -38,11 +39,11 @@ class CubeDataset(Dataset) :
 
         print(f'Dataset created: {self.n_features} features, {self.n_samples} samples')
 
-    def __len__(self) :
+    def __len__(self) -> int:
         """ Returns len(self) """
         return self.n_samples
 
-    def __getitem__(self, index) :
+    def __getitem__(self, index) -> Tuple[Tensor, Tensor, Tensor] :
         """ Returns self[index] """
         return self.x[index, :], self.mask[index, :], self.sigma[index, :]
 
@@ -64,8 +65,8 @@ class CubeSubset(CubeDataset) :
         self.dataset : CubeDataset = dataset
         self.indices : Sequence[int] = indices
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> Tuple[Tensor, Tensor, Tensor]:
         return self.dataset[self.indices[index]]
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.indices)
